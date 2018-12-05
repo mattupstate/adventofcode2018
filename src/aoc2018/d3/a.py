@@ -25,7 +25,7 @@ def parse_claim(value):
 def generate_grid(claim, canvas_width, canvas_height):
     canvas_width = canvas_width or claim.width
     canvas_height = canvas_height or claim.height
-    return set([canvas_width * (claim.y + r) + claim.x + c for r in range(claim.height) for c in range(claim.width)])
+    return {canvas_width * (claim.y + r) + claim.x + c for r in range(claim.height) for c in range(claim.width)}
 
 def get_grid(claim, canvas_width, canvas_height):
     if claim.id not in GRIDS:
