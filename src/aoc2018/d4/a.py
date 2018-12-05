@@ -7,13 +7,10 @@ from aoc2018.data import load_input
 
 AWAKE = "awake"
 ASLEEP = "asleep"
-OFFDUTY = "offduty"
 GUARDS = dict()
 
-Event = namedtuple('Event', ['guard', 'state', 'timestamp'])
 
 class Guard(object):
-
 
     def __init__(self, id):
         self.id = id
