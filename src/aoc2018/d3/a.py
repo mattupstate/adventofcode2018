@@ -37,9 +37,11 @@ def load_claims():
 
 def main():
     claims = load_claims()
+    right = max([claim.x + claim.width for claim in claims])
+    bottom = max([claim.y + claim.height for claim in claims])
     result = set()
     for a, b in [(a, b) for a in claims for b in claims if a != b]:
-        result.update(get_grid(a, 1000, 1000) & get_grid(b, 1000, 1000))
+        result.update(get_grid(a, right, bottom) & get_grid(b, right, bottom))
     print(len(result))
 
 if __name__ == "__main__":
