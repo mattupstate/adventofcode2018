@@ -4,17 +4,21 @@ def load_polymer():
     return load_input(__file__)[0].strip()
 
 def react(polymer):
-    done = False
-    while not done:
-        start_len = len(polymer)
-        for i, c1 in enumerate(polymer[:-1]):
-            c2 = polymer[i + 1]
-            if (c1.isupper() and c2.islower() and c1.lower() == c2.lower() or
-                c1.islower() and c2.isupper() and c1.lower() == c2.lower()):
-                polymer = polymer[:i] + polymer[i+2:]
-                break
-        done = start_len == len(polymer)
-    return polymer
+    reacted_polymer = []
+
+    for current_unit in polymer:
+        try:
+            prev_unit = reacted_polymer.pop()
+        except IndexError:
+            prev_unit = None
+
+        if prev_unit is None:
+            reacted_polymer.append(current_unit)
+        elif prev_unit.lower() != current_unit.lower() or prev_unit == current_unit:
+            reacted_polymer.append(prev_unit)
+            reacted_polymer.append(current_unit)
+
+    return reacted_polymer
 
 def main():
     print(len(react(load_polymer())))
